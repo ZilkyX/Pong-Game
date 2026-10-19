@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://cpsxbe0bp6vdd"]
+
+[ext_resource type="Texture2D" uid="uid://cjbt0lljwelue" path="res://assets/Minimalist Pong Court Template.png" id="1_v0l8b"]
+[ext_resource type="Script" uid="uid://cuc6m6uyrtqyo" path="res://scene/main.gd" id="2_brvut"]
+[ext_resource type="FontFile" uid="uid://dqiml05n3yrcd" path="res://assets/ARCADECLASSIC.TTF" id="2_wp4xf"]
+[ext_resource type="Script" uid="uid://cou444c6epbnk" path="res://scene/player.gd" id="3_brvut"]
+[ext_resource type="Script" uid="uid://b21484o2hv2r0" path="res://scene/ball.gd" id="4_0ha60"]
+[ext_resource type="Script" uid="uid://d3tc1vs7pkp1i" path="res://scene/cpu.gd" id="4_4j5ol"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lx63m"]
+size = Vector2(20, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ssgn"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xls3d"]
+size = Vector2(1536, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1mto"]
+size = Vector2(1536, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddols"]
+size = Vector2(130, 1024)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqf4e"]
+size = Vector2(128, 1024)
+
+[node name="Main" type="Sprite2D" unique_id=405851542]
+texture_filter = 1
+texture = ExtResource("1_v0l8b")
+centered = false
+script = ExtResource("2_brvut")
+
+[node name="Player" type="StaticBody2D" parent="." unique_id=1379385898]
+position = Vector2(50, 524)
+script = ExtResource("3_brvut")
+
+[node name="ColorRect" type="ColorRect" parent="Player" unique_id=234619300]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = 60.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1485086047]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_lx63m")
+
+[node name="CPU" type="StaticBody2D" parent="." unique_id=404999287]
+position = Vector2(1464, 524)
+script = ExtResource("4_4j5ol")
+
+[node name="ColorRect" type="ColorRect" parent="CPU" unique_id=1929867233]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = 60.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPU" unique_id=776796122]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_lx63m")
+
+[node name="Ball" type="CharacterBody2D" parent="." unique_id=82821253]
+position = Vector2(768, 520)
+collision_mask = 3
+script = ExtResource("4_0ha60")
+
+[node name="ColorRect" type="ColorRect" parent="Ball" unique_id=1991659980]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=2066848992]
+shape = SubResource("RectangleShape2D_7ssgn")
+
+[node name="Borders" type="StaticBody2D" parent="." unique_id=458460529]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="Borders" unique_id=1628594880]
+position = Vector2(768, -64)
+shape = SubResource("RectangleShape2D_xls3d")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders" unique_id=828532175]
+position = Vector2(768, 1088)
+shape = SubResource("RectangleShape2D_a1mto")
+
+[node name="ScoreLeft" type="Area2D" parent="." unique_id=269072856]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreLeft" unique_id=2100732027]
+position = Vector2(-63, 512)
+shape = SubResource("RectangleShape2D_ddols")
+
+[node name="ScoreRight" type="Area2D" parent="." unique_id=1537370358]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreRight" unique_id=1567422228]
+position = Vector2(1600, 512)
+shape = SubResource("RectangleShape2D_vqf4e")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1839615252]
+
+[node name="PlayerScore" type="Label" parent="HUD" unique_id=161120026]
+offset_left = 650.0
+offset_top = 60.0
+offset_right = 690.0
+offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("2_wp4xf")
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUScore" type="Label" parent="HUD" unique_id=1775778389]
+offset_left = 850.0
+offset_top = 60.0
+offset_right = 890.0
+offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("2_wp4xf")
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallTimer" type="Timer" parent="." unique_id=68068140]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="ScoreLeft" to="." method="_on_score_left_body_entered"]
+[connection signal="body_entered" from="ScoreRight" to="." method="_on_score_right_body_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
